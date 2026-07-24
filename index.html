@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday SUMAIYA ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --primary: #ff4d6d;
+            --secondary: #ffccd5;
+            --glass: rgba(255, 255, 255, 0.15);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
+        /* Glassmorphism Container */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: 0.5s ease;
+        }
+        h1 { font-family: 'Dancing Script', cursive; font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
+        p { line-height: 1.6; margin-bottom: 20px; }
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+        }
+        .btn:hover { transform: scale(1.05); background: #ff758f; }
+
+        /* Step Animations */
+        .hidden { display: none; }
+        .fade-in { animation: fadeIn 1s forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Floating Hearts Background */
+        .heart { position: absolute; color: var(--primary); opacity: 0.6; animation: float 5s infinite linear; pointer-events: none; }
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Step 1: Initial Surprise -->
+    <div id="step1" class="glass-card fade-in">
+        <div style="font-size: 50px;">🎁</div>
+        <h2>Hey Sumaiya...</h2>
+        <p>I built something special just for you. Ready for your surprise?</p>
+        <button class="btn" onclick="nextStep(2)">Open It ❤️</button>
+    </div>
+
+    <!-- Step 2: The Emotional Message -->
+    <div id="step2" class="glass-card hidden">
+        <h1>To My Dear SUMAIYA</h1>
+        <p>"Every year, the world celebrates the day you were born, but I celebrate it every single day. You make my life a beautiful melody."</p>
+        <p>Happy Birthday to the most amazing girl in the world!</p>
+        <button class="btn" onclick="nextStep(3)">See Your Gift ✨</button>
+    </div>
+
+    <!-- Step 3: Final Celebration -->
+    <div id="step3" class="glass-card hidden">
+        <h1 id="celebrate-text">HBD SUMAIYA! 🎉</h1>
+        <p>May your day be filled with as much love as you give to me.</p>
+        <div style="margin: 20px 0; font-size: 14px; opacity: 0.8;">With all my love, <br><strong>— SAZZAD</strong></div>
+        <button class="btn" onclick="triggerConfetti()">More Magic! 🎈</button>
+    </div>
+
+    <script>
+        function nextStep(step) {
+            document.querySelectorAll('.glass-card').forEach(card => card.classList.add('hidden'));
+            const currentStep = document.getElementById(`step${step}`);
+            currentStep.classList.remove('hidden');
+            currentStep.classList.add('fade-in');
+            
+            if(step === 3) {
+                triggerConfetti();
+                setInterval(createHeart, 500);
+            }
+        }
+
+        function triggerConfetti() {
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#ff4d6d', '#ffccd5', '#ffffff'] });
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+    </script>
+</body>
+</html>
